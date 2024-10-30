@@ -8,6 +8,7 @@
 #include "Sprite.h"
 #include "ViewProjection.h"
 #include "WorldTransform.h"
+#include "DebugCamera.h"
 
 /// <summary>
 /// ゲームシーン
@@ -40,6 +41,8 @@ public: // メンバ関数
 	/// </summary>
 	void Draw();
 
+	bool isDebugCameraActive_ = false;
+
 private: // メンバ変数
 	DirectXCommon* dxCommon_ = nullptr;
 	Input* input_ = nullptr;
@@ -54,5 +57,6 @@ private: // メンバ変数
 	ViewProjection viewProjection_;
 	// 　自キャラ
 	Player* player_ = nullptr;
+	DebugCamera* debugCamera_ = nullptr;
 	/// </summary>
 };

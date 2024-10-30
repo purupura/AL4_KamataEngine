@@ -1,12 +1,13 @@
 #pragma once
 #include <Model.h>
-#include <WorldTransform.h>
+#include "Input.h"
+#include "WorldTransform.h"
 
 /// <summary>
 /// 自キャラ
 /// </summary>
 class Player {
-	ViewProjection* viewProjection_ = nullptr;
+
 
 public:
 	/// <summary>
@@ -31,4 +32,9 @@ private:
 	Model* model_ = nullptr;
 	// 　テクスチャハンドル
 	uint32_t textureHandle_ = 0u;
+	//キーボード入力
+	Input*input_=nullptr;
+
+	ViewProjection* viewProjection_ = nullptr;
+
 };
