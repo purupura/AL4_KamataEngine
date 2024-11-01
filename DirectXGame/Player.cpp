@@ -48,6 +48,13 @@ void Player::Update() {
 	worldTransform_.translation_.y = max(worldTransform_.translation_.y, -kMoveLimitY);
 	worldTransform_.translation_.y = min(worldTransform_.translation_.y, +kMoveLimitY);
 
+	Rotate();
+
+	Attack();
+
+	if (bullet_) {
+		bullet_->Update();
+	}
 
 	//座標移動（ベクトルの加算）
 	worldTransform_.translation_ += move;
@@ -68,4 +75,41 @@ void Player::Update() {
 
 	}
 
-void Player::Draw() { model_->Draw(worldTransform_, *viewProjection_, textureHandle_); }
+void Player::Draw() { 
+	model_->Draw(worldTransform_, *viewProjection_, textureHandle_); 
+	if (bullet_) {
+		bullet_->Draw(*viewProjection_);
+	}
+}
+
+void Player::Rotate() {
+	
+		// 回転速さ
+	    const float kRotSpeed = 0.02f;
+
+	    // 押した方向で移動ベクトルを変更
+		if (input_->PushKey(DIK_A)) {
+		    worldTransform_.rotation_.y -= kRotSpeed;
+		}
+	    if (input_->PushKey(DIK_D)) {
+		    worldTransform_.rotation_.y += kRotSpeed;
+	    }
+
+		Attack();
+
+	    if (bullet_) {
+		    bullet_->Update();
+	    }
+}
+
+void Player::Attack() {
+	if (input_->TriggerKey(DIK_0)) {
+		PlayerBullet* newBullet = new PlayerBullet();
+		newBullet->Initialize(model_, worldTransform_.translation_);
+
+		bullet_ = newBullet;
+	}
+}
+
+
+

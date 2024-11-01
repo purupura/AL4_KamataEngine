@@ -2,6 +2,7 @@
 #include <Model.h>
 #include "Input.h"
 #include "WorldTransform.h"
+#include "PlayerBullet.h"
 
 /// <summary>
 /// 自キャラ
@@ -25,6 +26,10 @@ public:
 	/// </summary>
 	void Draw();
 
+	void Rotate();
+
+	void Attack();
+
 private:
 	// 　ワールド変換データ
 	WorldTransform worldTransform_;
@@ -36,5 +41,7 @@ private:
 	Input*input_=nullptr;
 
 	ViewProjection* viewProjection_ = nullptr;
+
+	PlayerBullet* bullet_ = nullptr;
 
 };
