@@ -66,7 +66,7 @@ void Player::Update() {
 
 	worldTransform_.UpdateMatrix();
 
-	ImGui::Begin("a");
+	ImGui::Begin("debug");
 	ImGui::InputFloat("SpriteX", &worldTransform_.translation_.x);
 	ImGui::SliderFloat("SliderSpriteX", &worldTransform_.translation_.x, -100.0f, 1000.0f);
 
