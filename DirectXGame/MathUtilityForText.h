@@ -32,6 +32,8 @@ Vector3 Lerp(const Vector3& a, const Vector3& b, float t);
 
 Vector3 Multiply(float scalar, const Vector3& v);
 
+
+
 // 代入演算子オーバーロード
 // Vector3の掛け算
 Vector3& operator*=(Vector3& v, float s);
@@ -57,3 +59,5 @@ bool IsCollision(const AABB& aabb1, const AABB& aabb2);
 Matrix4x4 MakeRotateZMatrix(float thata);
 
 Vector3 Transform(const Vector3& vector, const Matrix4x4& matrix);
+
+Vector3 TransformNormal(const Vector3& v, const Matrix4x4& matrix);

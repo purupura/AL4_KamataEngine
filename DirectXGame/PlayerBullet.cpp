@@ -2,7 +2,7 @@
 #include <cassert>
 
 
-void PlayerBullet::Initialize(Model* model, const Vector3& position) {
+void PlayerBullet::Initialize(Model* model, const Vector3& position,const Vector3& velocity) {
 	assert(model);
 
 	model_ = model;
@@ -12,10 +12,16 @@ void PlayerBullet::Initialize(Model* model, const Vector3& position) {
 	worldTransform_.Initialize();
 
 	worldTransform_.translation_ = position;
+
+	velocity_ = velocity;
 }
 
 void PlayerBullet::Update() { 
+	worldTransform_.translation_ += velocity_;
 	worldTransform_.UpdateMatrix(); 
+	if (--deathTimer_ <= 0) {
+		isDead_ = true;
+	}
 }
 
 void PlayerBullet::Draw(const ViewProjection& viewProjection) { 
