@@ -19,6 +19,10 @@ void Player::Initialize(Model* model, uint32_t textureHandle, ViewProjection* vi
 	worldTransform_.Initialize();
 
 	input_ = Input::GetInstance();
+
+	 for (PlayerBullet* bullet : bullets_) {
+		delete bullet;
+	}
 }
 
 void Player::Update() {
@@ -52,8 +56,8 @@ void Player::Update() {
 
 	Attack();
 
-	if (bullet_) {
-		bullet_->Update();
+	 for (PlayerBullet* bullet : bullets_) {
+		bullet->Update();
 	}
 
 	//座標移動（ベクトルの加算）
@@ -76,9 +80,9 @@ void Player::Update() {
 	}
 
 void Player::Draw() { 
-	model_->Draw(worldTransform_, *viewProjection_, textureHandle_); 
-	if (bullet_) {
-		bullet_->Draw(*viewProjection_);
+	model_->Draw(worldTransform_, *viewProjection_, textureHandle_);
+	for (PlayerBullet* bullet : bullets_) {
+		bullet->Draw(*viewProjection_);
 	}
 }
 
@@ -97,19 +101,22 @@ void Player::Rotate() {
 
 		Attack();
 
-	    if (bullet_) {
-		    bullet_->Update();
-	    }
+	 for (PlayerBullet* bullet : bullets_) {
+		    bullet->Update();   
+	 }
 }
 
 void Player::Attack() {
 	if (input_->TriggerKey(DIK_0)) {
+
 		PlayerBullet* newBullet = new PlayerBullet();
 		newBullet->Initialize(model_, worldTransform_.translation_);
 
-		bullet_ = newBullet;
+		bullets_.push_back(newBullet);
 	}
 }
+
+Player::~Player() {}
 
 
 

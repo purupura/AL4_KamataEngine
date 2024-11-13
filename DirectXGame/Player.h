@@ -3,6 +3,7 @@
 #include "Input.h"
 #include "WorldTransform.h"
 #include "PlayerBullet.h"
+#include <list>
 
 /// <summary>
 /// 自キャラ
@@ -30,6 +31,8 @@ public:
 
 	void Attack();
 
+	~Player();
+
 private:
 	// 　ワールド変換データ
 	WorldTransform worldTransform_;
@@ -42,6 +45,6 @@ private:
 
 	ViewProjection* viewProjection_ = nullptr;
 
-	PlayerBullet* bullet_ = nullptr;
+	std::list<PlayerBullet*> bullets_;
 
 };
