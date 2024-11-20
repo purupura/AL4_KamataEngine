@@ -2,6 +2,9 @@
 
 #include <Model.h>
 #include "WorldTransform.h"
+#include <list>
+#include "EnemyBullet.h"
+
 
 class Enemy {
 
@@ -21,6 +24,21 @@ class Enemy {
 	/// </summary>
 	void Draw();
 
+	//敵の接近処理
+	void Approach();
+	//敵の離脱処理
+	void Leave();
+	//敵の弾発射処理
+	void Fire();
+
+	//接近フェーズの初期化
+	void approachInitialize();
+
+	//デストラクタ
+	~Enemy();
+
+	static const int kFireInterval = 60;
+
 	private:
 	// 　ワールド変換データ
 	WorldTransform worldTransform_;
@@ -31,4 +49,14 @@ class Enemy {
 
 	ViewProjection* viewProjection_ = nullptr;
 
+	enum class Phase {
+		Approach,//接近
+		Leave,//離脱
+	};
+
+	Phase phase_ = Phase::Approach;
+
+	std::list<EnemyBullet*> bullets_;
+
+	int32_t fireTimmer = 0;
 };

@@ -20,9 +20,7 @@ void Player::Initialize(Model* model, uint32_t textureHandle, ViewProjection* vi
 
 	input_ = Input::GetInstance();
 
-	 for (PlayerBullet* bullet : bullets_) {
-		delete bullet;
-	}
+
 }
 
 void Player::Update() {
@@ -130,7 +128,11 @@ void Player::Attack() {
 	}
 }
 
-Player::~Player() {}
+Player::~Player() {
+	for (PlayerBullet* bullet : bullets_) {
+		delete bullet;
+	}
+}
 
 
 
